@@ -1,0 +1,50 @@
+﻿@model CalculatePremiumWebApp.Models.Person
+@{
+    ViewBag.Title = "Index";
+}
+
+<html>
+<head></head>
+<body>
+    <h2>Calculate Premium</h2>
+    <div class="row">
+        @using (Html.BeginForm("/Index", "person", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="@Model.Name" required />
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="text" class="form-control" id="age" name="age" value="@Model.Age" required />
+            </div>
+            <div class="form-group">
+                <label for="datePicker">Date of Birth (Optional)</label>
+                <input type="date" class="form-control" id="datePicker" name="datePicker" value="@Model.DateOfBirth"/>
+            </div>
+            <div class="form-group">
+                <label for="occupation">Occupation</label>
+                <br />
+                @Html.DropDownListFor(model => model.Occupation, new SelectList(Model.Occupations, "Value", "Text"), "Select Occupation", new { @onchange = @"form.submit();"})
+            </div>
+            <div class="form-group">
+                <label for="sumInsured">Sum Insured</label>
+                <input type="text" class="form-control" id="sumInsured" name="sumInsured" value="@Model.SumInsured" required />
+            </div>
+            <br />
+            <button type="submit" class="btn btn-info" id="calculate" value="calculate">Calculate</button>
+            <br />
+            <br />
+            <div class="form-group">
+                <label for="premium">Premium</label>
+                <input type="text" class="form-control" readonly="readonly" id="premium" name="premium" value="@Model.Premium" />
+            </div>
+        }
+
+    </div>
+
+    
+</body>
+</html>
+
